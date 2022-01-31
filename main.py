@@ -14,9 +14,9 @@ params = {
 response = requests.get(f"https://api.openweathermap.org/data/2.5/onecall", params=params)
 response.raise_for_status()
 weather_data = response.json()
-hourly_weather = weather_data["hourly"]
-# print(hourly_weather[0]["weather"][0]["id"])
-print(type(hourly_weather))
-# for hr in hourly_weather[:12]:
-#     print(hourly_weather[hr]["weather"][0]["id"])
+
+hourly_weather_id = [weather_data["hourly"][hr]["weather"][0]["id"] for hr in range(12)]
+
+if any(code < 700 for code in hourly_weather_id):
+    print("Bring an umbrella.")
 
